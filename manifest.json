@@ -1,0 +1,20 @@
+{
+    "name": "GLPI Notificações",
+    "short_name": "GLPI Sino",
+    "description": "Sistema de notificações para GLPI",
+    "start_url": "/front/central.php",
+    "display": "standalone",
+    "background_color": "#ffffff",
+    "theme_color": "#ffc107",
+    "icons": [
+        {
+            "src": "/plugins/sinodenotificacao/icon.png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "purpose": "any maskable"
+        }
+    ],
+    "notifications": {
+        "enabled": true
+    }
+}

@@ -1,0 +1,1543 @@
+/**
+ * CSS para Sino de Notificação - Responsivo e Melhorado com Notificações Manuais
+ * VERSÃO COMPLETA COM CORREÇÕES DE BOTÕES E SELEÇÃO DE USUÁRIOS/GRUPOS
+ */
+
+/* Sino integrado com espaçamento adequado */
+.sino-notificacao-glpi {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    margin-left: 0.75rem !important;
+    margin-right: 0.75rem !important;
+    position: relative !important;
+}
+
+/* Botão do sino AMARELO com espaçamento */
+.sino-btn-notificacao {
+    position: relative;
+    border: 1px solid #ffc107 !important;
+    color: #ffc107 !important;
+    background-color: transparent !important;
+    padding: 0.375rem 0.75rem !important;
+    font-size: 0.875rem !important;
+    line-height: 1.5 !important;
+    border-radius: 0.375rem !important;
+    transition: all 0.15s ease-in-out !important;
+    margin: 0 0.25rem !important;
+}
+
+.sino-btn-notificacao:hover,
+.sino-btn-notificacao:focus {
+    color: #f0ad4e !important;
+    border-color: #f0ad4e !important;
+    background-color: rgba(255, 193, 7, 0.1) !important;
+    box-shadow: 0 0 0 0.2rem rgba(255, 193, 7, 0.25) !important;
+}
+
+.sino-btn-notificacao:active {
+    transform: scale(0.95);
+}
+
+/* Ícone do sino AMARELO */
+.sino-btn-notificacao i {
+    font-size: 1rem;
+    width: 16px;
+    text-align: center;
+    color: #ffc107 !important;
+    transition: all 0.3s ease;
+}
+
+/* EFEITO PISCAR DO SINO */
+.sino-blink {
+    animation: sino-piscar 0.5s ease-in-out infinite alternate;
+}
+
+@keyframes sino-piscar {
+    0% { 
+        opacity: 1; 
+        color: #ffc107 !important;
+        text-shadow: 0 0 5px #ffc107;
+        transform: scale(1);
+    }
+    100% { 
+        opacity: 0.4; 
+        color: #ffed4e !important;
+        text-shadow: 0 0 15px #ffc107, 0 0 25px #ffc107;
+        transform: scale(1.1);
+    }
+}
+
+/* Badge de notificação com piscar */
+.sino-badge {
+    position: absolute !important;
+    top: -5px !important;
+    right: -5px !important;
+    font-size: 0.6rem !important;
+    padding: 0.25em 0.4em !important;
+    border-radius: 50% !important;
+    min-width: 18px !important;
+    height: 18px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    font-weight: 600 !important;
+    transition: all 0.3s ease;
+}
+
+/* EFEITO PISCAR DO NÚMERO */
+.number-blink {
+    animation: number-piscar 0.5s ease-in-out infinite alternate;
+}
+
+@keyframes number-piscar {
+    0% { 
+        transform: scale(1);
+        background-color: #dc3545 !important;
+        box-shadow: 0 0 5px #dc3545;
+    }
+    100% { 
+        transform: scale(1.3);
+        background-color: #ff4757 !important;
+        box-shadow: 0 0 15px #dc3545, 0 0 25px #dc3545;
+    }
+}
+
+/* Dropdown RESPONSIVO e posicionado corretamente */
+.sino-dropdown-notificacoes {
+    position: fixed !important;
+    top: auto !important;
+    right: 1rem !important;
+    left: auto !important;
+    z-index: 9999 !important;
+    transition: opacity 0.3s ease-out, transform 0.3s ease-out !important;
+    will-change: opacity, transform;
+    border: 1px solid rgba(0, 0, 0, 0.15) !important;
+    box-shadow: 0 0.5rem 2rem rgba(0, 0, 0, 0.3) !important;
+    border-radius: 0.75rem !important;
+    background-color: #fff !important;
+    overflow: hidden;
+    max-width: calc(100vw - 2rem) !important;
+    width: 450px !important;
+    max-height: calc(100vh - 120px) !important;
+}
+
+.sino-dropdown-notificacoes.entered {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+}
+
+/* Animação de entrada sem piscada */
+.sino-dropdown-notificacoes.entering {
+    opacity: 0;
+    transform: translateY(-10px) scale(0.95);
+}
+
+/* Ajuste de posicionamento baseado na viewport */
+@media (max-width: 576px) {
+    .sino-dropdown-notificacoes {
+        width: calc(100vw - 2rem) !important;
+        right: 1rem !important;
+        left: 1rem !important;
+        top: 60px !important;
+    }
+}
+
+@media (min-width: 577px) and (max-width: 768px) {
+    .sino-dropdown-notificacoes {
+        width: 400px !important;
+        right: 1rem !important;
+        top: 60px !important;
+    }
+}
+
+@media (min-width: 769px) {
+    .sino-dropdown-notificacoes {
+        width: 450px !important;
+        right: 1rem !important;
+        top: 60px !important;
+    }
+}
+
+/* Header do dropdown COM BOTÕES */
+.dropdown-header {
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%) !important;
+    border-bottom: 1px solid #dee2e6 !important;
+    border-radius: 0.75rem 0.75rem 0 0 !important;
+    padding: 0.75rem 1rem !important;
+    position: sticky !important;
+    top: 0 !important;
+    z-index: 1 !important;
+}
+
+.header-buttons {
+    display: flex !important;
+    gap: 0.25rem !important;
+    pointer-events: auto !important;
+    z-index: 10 !important;
+}
+
+.header-buttons .btn {
+    padding: 0.25rem 0.5rem !important;
+    font-size: 0.75rem !important;
+    cursor: pointer !important;
+    pointer-events: auto !important;
+    user-select: none !important;
+    transition: all 0.2s ease !important;
+    position: relative !important;
+    z-index: 10 !important;
+}
+
+.header-buttons .btn:hover {
+    transform: scale(1.05) !important;
+    z-index: 11 !important;
+}
+
+.header-buttons .btn:active {
+    transform: scale(0.95) !important;
+}
+
+.header-buttons * {
+    pointer-events: auto !important;
+}
+
+/* Container de notificações responsivo */
+.notifications-container {
+    scrollbar-width: thin;
+    scrollbar-color: #dee2e6 transparent;
+    max-height: calc(100vh - 200px) !important;
+    overflow-y: auto !important;
+    background-color: #fff;
+    min-height: 200px !important;
+}
+
+.notifications-container::-webkit-scrollbar {
+    width: 8px;
+}
+
+.notifications-container::-webkit-scrollbar-track {
+    background: #f8f9fa;
+    border-radius: 4px;
+}
+
+.notifications-container::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, #dee2e6 0%, #adb5bd 100%);
+    border-radius: 4px;
+    border: 1px solid #f8f9fa;
+}
+
+.notifications-container::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(180deg, #adb5bd 0%, #6c757d 100%);
+}
+
+/* Itens de notificação melhorados */
+.notification-item {
+    transition: all 0.3s ease !important;
+    cursor: pointer;
+    border-radius: 8px !important;
+    margin: 4px 8px !important;
+    position: relative;
+    overflow: hidden;
+    border-left: 4px solid transparent !important;
+}
+
+.notification-item:hover {
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%) !important;
+    transform: translateX(4px) translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    border-left: 4px solid #007bff !important;
+}
+
+.notification-item:last-child {
+    border-bottom: none !important;
+    margin-bottom: 8px !important;
+}
+
+.notification-item a {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    border-radius: 8px;
+    text-decoration: none !important;
+}
+
+.notification-item a:hover {
+    background: linear-gradient(135deg, rgba(13, 110, 253, 0.05) 0%, rgba(13, 110, 253, 0.1) 100%) !important;
+}
+
+/* Notificações não lidas */
+.notification-item.unread {
+    background-color: rgba(255, 193, 7, 0.05) !important;
+    border-left: 4px solid #ffc107 !important;
+}
+
+.notification-item.unread::after {
+    content: '';
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    width: 8px;
+    height: 8px;
+    background-color: #ffc107;
+    border-radius: 50%;
+    box-shadow: 0 0 0 2px #fff;
+}
+
+/* Notificações manuais - DESTAQUE ESPECIAL */
+.notification-item.manual-notification {
+    background: linear-gradient(135deg, rgba(32, 201, 151, 0.08) 0%, rgba(32, 201, 151, 0.15) 100%) !important;
+    border-left: 4px solid #20c997 !important;
+    box-shadow: 0 2px 8px rgba(32, 201, 151, 0.2) !important;
+}
+
+.notification-item.manual-notification:hover {
+    background: linear-gradient(135deg, rgba(32, 201, 151, 0.15) 0%, rgba(32, 201, 151, 0.25) 100%) !important;
+    border-left: 4px solid #1a9c7b !important;
+    box-shadow: 0 4px 16px rgba(32, 201, 151, 0.3) !important;
+}
+
+.notification-item.manual-notification .notification-title {
+    color: #1a9c7b !important;
+    font-weight: 700 !important;
+}
+
+.notification-item.manual-notification .notification-icon i {
+    background: linear-gradient(135deg, #20c997 0%, #1a9c7b 100%) !important;
+    color: white !important;
+    box-shadow: 0 2px 8px rgba(32, 201, 151, 0.4) !important;
+}
+
+/* Ícones das notificações melhorados */
+.notification-icon {
+    width: 28px;
+    text-align: center;
+    flex-shrink: 0;
+    margin-top: 2px;
+}
+
+.notification-icon i {
+    font-size: 1.1rem;
+    padding: 6px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* Conteúdo das notificações melhorado */
+.notification-title {
+    font-size: 0.9rem;
+    line-height: 1.3;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    color: #212529 !important;
+}
+
+.notification-text {
+   font-size: 0.8rem;
+   line-height: 1.3;
+   margin-bottom: 0.5rem;
+   color: #6c757d !important;
+}
+
+.notification-meta {
+   font-size: 0.75rem;
+}
+
+.notification-user {
+   font-style: italic;
+   color: #495057 !important;
+   font-weight: 500;
+}
+
+.notification-time {
+   font-weight: 600;
+   color: #007bff !important;
+}
+
+/* Footer do dropdown */
+.dropdown-header,
+.notifications-container,
+.dropdown-footer {
+   background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%) !important;
+   border-top: 1px solid #dee2e6 !important;
+   border-radius: 0 0 0.75rem 0.75rem !important;
+   padding: 0.75rem 1rem !important;
+   position: sticky !important;
+   bottom: 0 !important;
+   z-index: 1 !important;
+   backface-visibility: hidden;
+    transform: translateZ(0);
+}
+
+/* Botões do footer */
+.dropdown-footer .btn {
+   margin-right: 0.5rem !important;
+}
+
+/* Animação de balançar o sino */
+@keyframes sino-shake {
+   0%, 100% { transform: rotate(0deg); }
+   10%, 30%, 50%, 70%, 90% { transform: rotate(-15deg); }
+   20%, 40%, 60%, 80% { transform: rotate(15deg); }
+}
+
+.sino-shake {
+   animation: sino-shake 0.6s ease-in-out;
+   transform-origin: top center;
+}
+
+/* Estados de prioridade */
+.notification-item[data-priority="5"],
+.notification-item[data-priority="6"] {
+   border-left: 4px solid #dc3545 !important;
+}
+
+.notification-item[data-priority="4"] {
+   border-left: 4px solid #ffc107 !important;
+}
+
+.notification-item[data-priority="1"],
+.notification-item[data-priority="2"] {
+   border-left: 4px solid #28a745 !important;
+}
+
+/* MODAL DE ENVIO MANUAL - ESTILOS MELHORADOS E EXPANDIDOS */
+.modal-envio-manual {
+    backdrop-filter: blur(3px) !important;
+    animation: modal-fadein 0.3s ease-out;
+}
+
+.modal-envio-manual .modal-content {
+    border: none !important;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.4) !important;
+    border-radius: 0.75rem !important;
+    animation: modal-slide-up 0.3s ease-out;
+    max-width: 650px !important;
+}
+
+@keyframes modal-fadein {
+    from { 
+        opacity: 0; 
+    }
+    to { 
+        opacity: 1; 
+    }
+}
+
+@keyframes modal-slide-up {
+    from { 
+        transform: translateY(30px) scale(0.95);
+        opacity: 0;
+    }
+    to { 
+        transform: translateY(0) scale(1);
+        opacity: 1;
+    }
+}
+
+.modal-envio-manual .form-control,
+.modal-envio-manual .form-select {
+    border: 1px solid #dee2e6 !important;
+    border-radius: 0.5rem !important;
+    transition: all 0.3s ease !important;
+    font-size: 0.95rem !important;
+}
+
+.modal-envio-manual .form-control:focus,
+.modal-envio-manual .form-select:focus {
+    border-color: #28a745 !important;
+    box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.25) !important;
+}
+
+/* Estilos específicos para os campos de seleção de usuário/grupo */
+#target-user-field,
+#target-group-field {
+    background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%) !important;
+    border: 1px solid #e9ecef !important;
+    border-radius: 0.5rem !important;
+    padding: 0.75rem !important;
+    margin-bottom: 1rem !important;
+    transition: all 0.3s ease !important;
+}
+
+#target-user-field.show,
+#target-group-field.show {
+    animation: field-slide-down 0.3s ease-out;
+    border-color: #28a745 !important;
+    box-shadow: 0 2px 8px rgba(40, 167, 69, 0.15) !important;
+}
+
+@keyframes field-slide-down {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+        max-height: 0;
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+        max-height: 100px;
+    }
+}
+
+#target-user,
+#target-group {
+    background: white !important;
+    border: 1px solid #ced4da !important;
+    transition: all 0.3s ease !important;
+}
+
+#target-user:focus,
+#target-group:focus {
+    border-color: #007bff !important;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25) !important;
+}
+
+/* Alert de informações do destinatário */
+.target-info-text {
+    background: linear-gradient(135deg, #e3f2fd 0%, #f0f8ff 100%) !important;
+    border: 1px solid #81c784 !important;
+    border-radius: 0.5rem !important;
+    padding: 0.75rem !important;
+    font-size: 0.85rem !important;
+    line-height: 1.4 !important;
+    transition: all 0.3s ease !important;
+}
+
+.target-info-text i {
+    margin-right: 0.5rem !important;
+    font-size: 1rem !important;
+}
+
+/* Botões do modal */
+.modal-envio-manual .btn-enviar-agora {
+    background: linear-gradient(135deg, #28a745 0%, #20c997 100%) !important;
+    border: none !important;
+    color: white !important;
+    transition: all 0.3s ease !important;
+    font-weight: 600 !important;
+    padding: 0.5rem 1.25rem !important;
+}
+
+.modal-envio-manual .btn-enviar-agora:hover:not(:disabled) {
+    transform: translateY(-1px) !important;
+    box-shadow: 0 4px 12px rgba(40, 167, 69, 0.4) !important;
+    color: white !important;
+    background: linear-gradient(135deg, #20c997 0%, #28a745 100%) !important;
+}
+
+.modal-envio-manual .btn-enviar-agora:disabled {
+    opacity: 0.7 !important;
+    transform: none !important;
+    background: #6c757d !important;
+}
+
+.modal-envio-manual .form-text.text-warning {
+    font-weight: 600 !important;
+    color: #fd7e14 !important;
+}
+
+.modal-envio-manual label {
+    color: #495057 !important;
+    font-weight: 600 !important;
+    margin-bottom: 0.5rem !important;
+}
+
+.modal-envio-manual label i {
+    color: #007bff !important;
+    margin-right: 0.5rem !important;
+}
+
+.modal-envio-manual .modal-header {
+    border-bottom: 2px solid #e9ecef !important;
+    padding-bottom: 1rem !important;
+}
+
+.modal-envio-manual .modal-footer {
+    border-top: 2px solid #e9ecef !important;
+    padding-top: 1rem !important;
+}
+
+/* Layout em grid para prioridade e destinatário */
+.modal-envio-manual .row {
+    margin-left: -0.5rem !important;
+    margin-right: -0.5rem !important;
+}
+
+.modal-envio-manual .row .col-md-6 {
+    padding-left: 0.5rem !important;
+    padding-right: 0.5rem !important;
+}
+
+/* Responsividade do modal */
+@media (max-width: 576px) {
+    .modal-envio-manual .modal-content {
+        width: 95% !important;
+        margin: 1rem !important;
+        max-width: none !important;
+    }
+    
+    .modal-envio-manual .modal-header h5 {
+        font-size: 1.1rem !important;
+    }
+    
+    .modal-envio-manual .form-control,
+    .modal-envio-manual .form-select {
+        font-size: 0.9rem !important;
+    }
+    
+    .modal-envio-manual .row .col-md-6 {
+        margin-bottom: 1rem !important;
+    }
+    
+    .modal-envio-manual .btn {
+        width: 100% !important;
+        margin-bottom: 0.5rem !important;
+    }
+}
+
+@media (min-width: 577px) and (max-width: 768px) {
+    .modal-envio-manual .modal-content {
+        width: 90% !important;
+        max-width: 600px !important;
+    }
+}
+
+/* Botão de envio manual no header - DESTAQUE */
+.btn-enviar-manual {
+    background: linear-gradient(135deg, #28a745 0%, #20c997 100%) !important;
+    border: none !important;
+    color: white !important;
+    transition: opacity 0.3s ease-out, transform 0.2s ease-out !important;
+    will-change: opacity, transform;
+    font-weight: 600 !important;
+    box-shadow: 0 2px 4px rgba(40, 167, 69, 0.3) !important;
+}
+
+.btn-enviar-manual:hover {
+    transform: translateY(-1px) !important;
+    box-shadow: 0 4px 8px rgba(40, 167, 69, 0.4) !important;
+    color: white !important;
+    background: linear-gradient(135deg, #20c997 0%, #28a745 100%) !important;
+}
+
+.btn-enviar-manual:active {
+    transform: translateY(0) !important;
+}
+
+/* CORREÇÃO DOS BOTÕES DO HEADER - GARANTIR CLICABILIDADE */
+.header-buttons .btn:before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    border: 2px solid transparent;
+    border-radius: inherit;
+    transition: all 0.2s ease;
+    pointer-events: none;
+}
+
+.btn-enviar-manual:hover:before {
+    border-color: #28a745;
+    box-shadow: 0 0 0 2px rgba(40, 167, 69, 0.2);
+}
+
+.btn-marcar-todas:hover:before {
+    border-color: #6c757d;
+    box-shadow: 0 0 0 2px rgba(108, 117, 125, 0.2);
+}
+
+.btn-atualizar:hover:before {
+    border-color: #007bff;
+    box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.2);
+}
+
+.btn-testar-push:hover:before {
+    border-color: #17a2b8;
+    box-shadow: 0 0 0 2px rgba(23, 162, 184, 0.2);
+}
+
+/* Força visibilidade e clicabilidade */
+.btn-enviar-manual,
+.btn-marcar-todas,
+.btn-atualizar,
+.btn-testar-push {
+    display: inline-block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    pointer-events: auto !important;
+    cursor: pointer !important;
+    border: 1px solid !important;
+    background-color: transparent !important;
+    position: relative !important;
+    z-index: 5 !important;
+}
+
+/* Estados de botão desabilitado */
+.btn:disabled {
+    opacity: 0.6 !important;
+    cursor: not-allowed !important;
+    pointer-events: none !important;
+}
+
+/* Override de qualquer CSS que possa estar interferindo */
+button[class*="btn-"] {
+    cursor: pointer !important;
+    pointer-events: auto !important;
+}
+
+/* Animação para indicar que o botão é clicável */
+@keyframes button-pulse {
+    0% { 
+        transform: scale(1); 
+    }
+    50% { 
+        transform: scale(1.02); 
+    }
+    100% { 
+        transform: scale(1); 
+    }
+}
+
+.btn-interactive {
+    animation: button-pulse 2s ease-in-out infinite;
+}
+
+/* Animação de pulso para o botão quando há poucas notificações */
+@keyframes pulse-green {
+    0% { 
+        box-shadow: 0 2px 4px rgba(40, 167, 69, 0.3);
+    }
+    50% { 
+        box-shadow: 0 4px 8px rgba(40, 167, 69, 0.6);
+        transform: scale(1.05);
+    }
+    100% { 
+        box-shadow: 0 2px 4px rgba(40, 167, 69, 0.3);
+    }
+}
+
+.btn-enviar-manual.pulse {
+    animation: pulse-green 2s ease-in-out infinite;
+}
+
+/* Botão marcar como lida individual */
+.mark-read-btn {
+   position: absolute !important;
+   top: 8px !important;
+   right: 8px !important;
+   width: 20px !important;
+   height: 20px !important;
+   padding: 0 !important;
+   border: none !important;
+   background: rgba(255, 193, 7, 0.8) !important;
+   color: white !important;
+   border-radius: 50% !important;
+   font-size: 0.7rem !important;
+   display: flex !important;
+   align-items: center !important;
+   justify-content: center !important;
+   opacity: 0 !important;
+   transition: all 0.3s ease !important;
+}
+
+.notification-item:hover .mark-read-btn {
+   opacity: 1 !important;
+}
+
+.mark-read-btn:hover {
+   background: rgba(255, 193, 7, 1) !important;
+   transform: scale(1.1) !important;
+}
+
+/* Contadores separados */
+.notification-counters {
+   display: flex !important;
+   justify-content: space-between !important;
+   align-items: center !important;
+   font-size: 0.85rem !important;
+}
+
+.counter-unread {
+   color: #dc3545 !important;
+   font-weight: 600 !important;
+}
+
+.counter-total {
+   color: #6c757d !important;
+}
+
+/* CORES POR PRIORIDADE PARA NOTIFICAÇÕES MANUAIS */
+
+/* Notificação Manual - Baixa (Azul Claro) */
+.notification-item.manual-notification[data-priority="low"] {
+    background: linear-gradient(135deg, rgba(23, 162, 184, 0.08) 0%, rgba(23, 162, 184, 0.15) 100%) !important;
+    border-left: 4px solid #17a2b8 !important;
+    box-shadow: 0 2px 8px rgba(23, 162, 184, 0.2) !important;
+}
+
+.notification-item.manual-notification[data-priority="low"]:hover {
+    background: linear-gradient(135deg, rgba(23, 162, 184, 0.15) 0%, rgba(23, 162, 184, 0.25) 100%) !important;
+    border-left: 4px solid #138496 !important;
+    box-shadow: 0 4px 16px rgba(23, 162, 184, 0.3) !important;
+}
+
+.notification-item.manual-notification[data-priority="low"] .notification-title {
+    color: #138496 !important;
+    font-weight: 700 !important;
+}
+
+.notification-item.manual-notification[data-priority="low"] .notification-icon i {
+    background: linear-gradient(135deg, #17a2b8 0%, #138496 100%) !important;
+    color: white !important;
+    box-shadow: 0 2px 8px rgba(23, 162, 184, 0.4) !important;
+}
+
+/* Notificação Manual - Normal (Azul) */
+.notification-item.manual-notification[data-priority="normal"] {
+    background: linear-gradient(135deg, rgba(13, 110, 253, 0.08) 0%, rgba(13, 110, 253, 0.15) 100%) !important;
+    border-left: 4px solid #007bff !important;
+    box-shadow: 0 2px 8px rgba(13, 110, 253, 0.2) !important;
+}
+
+.notification-item.manual-notification[data-priority="normal"]:hover {
+    background: linear-gradient(135deg, rgba(13, 110, 253, 0.15) 0%, rgba(13, 110, 253, 0.25) 100%) !important;
+    border-left: 4px solid #0056b3 !important;
+    box-shadow: 0 4px 16px rgba(13, 110, 253, 0.3) !important;
+}
+
+.notification-item.manual-notification[data-priority="normal"] .notification-title {
+    color: #0056b3 !important;
+    font-weight: 700 !important;
+}
+
+.notification-item.manual-notification[data-priority="normal"] .notification-icon i {
+    background: linear-gradient(135deg, #007bff 0%, #0056b3 100%) !important;
+    color: white !important;
+    box-shadow: 0 2px 8px rgba(13, 110, 253, 0.4) !important;
+}
+
+/* Notificação Manual - Alta (Laranja) */
+.notification-item.manual-notification[data-priority="high"] {
+    background: linear-gradient(135deg, rgba(255, 193, 7, 0.08) 0%, rgba(255, 193, 7, 0.15) 100%) !important;
+    border-left: 4px solid #ffc107 !important;
+    box-shadow: 0 2px 8px rgba(255, 193, 7, 0.2) !important;
+}
+
+.notification-item.manual-notification[data-priority="high"]:hover {
+    background: linear-gradient(135deg, rgba(255, 193, 7, 0.15) 0%, rgba(255, 193, 7, 0.25) 100%) !important;
+    border-left: 4px solid #e0a800 !important;
+    box-shadow: 0 4px 16px rgba(255, 193, 7, 0.3) !important;
+}
+
+.notification-item.manual-notification[data-priority="high"] .notification-title {
+    color: #e0a800 !important;
+    font-weight: 700 !important;
+}
+
+.notification-item.manual-notification[data-priority="high"] .notification-icon i {
+    background: linear-gradient(135deg, #ffc107 0%, #e0a800 100%) !important;
+    color: white !important;
+    box-shadow: 0 2px 8px rgba(255, 193, 7, 0.4) !important;
+}
+
+/* Notificação Manual - Urgente (Vermelho) */
+.notification-item.manual-notification[data-priority="urgent"] {
+    background: linear-gradient(135deg, rgba(220, 53, 69, 0.08) 0%, rgba(220, 53, 69, 0.15) 100%) !important;
+    border-left: 4px solid #dc3545 !important;
+    box-shadow: 0 2px 8px rgba(220, 53, 69, 0.2) !important;
+}
+
+.notification-item.manual-notification[data-priority="urgent"]:hover {
+    background: linear-gradient(135deg, rgba(220, 53, 69, 0.15) 0%, rgba(220, 53, 69, 0.25) 100%) !important;
+    border-left: 4px solid #c82333 !important;
+    box-shadow: 0 4px 16px rgba(220, 53, 69, 0.3) !important;
+}
+
+.notification-item.manual-notification[data-priority="urgent"] .notification-title {
+    color: #c82333 !important;
+    font-weight: 700 !important;
+}
+
+.notification-item.manual-notification[data-priority="urgent"] .notification-icon i {
+    background: linear-gradient(135deg, #dc3545 0%, #c82333 100%) !important;
+    color: white !important;
+    box-shadow: 0 2px 8px rgba(220, 53, 69, 0.4) !important;
+}
+
+/* Animação especial para notificações urgentes */
+.notification-item.manual-notification[data-priority="urgent"] {
+    animation: urgent-pulse 2s ease-in-out infinite;
+}
+
+@keyframes urgent-pulse {
+    0% { 
+        box-shadow: 0 2px 8px rgba(220, 53, 69, 0.2);
+    }
+    50% { 
+        box-shadow: 0 4px 16px rgba(220, 53, 69, 0.4);
+    }
+    100% { 
+        box-shadow: 0 2px 8px rgba(220, 53, 69, 0.2);
+    }
+}
+
+/* ESTILOS ESPECIAIS PARA DIFERENTES TIPOS DE DESTINATÁRIO */
+
+/* Notificação para usuário específico */
+.notification-item.manual-notification[data-target-type="user"] {
+    border-left-style: double !important;
+    border-left-width: 6px !important;
+}
+
+.notification-item.manual-notification[data-target-type="user"]::before {
+    content: '👤';
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    font-size: 0.8rem;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+}
+
+/* Notificação para grupo */
+.notification-item.manual-notification[data-target-type="group"] {
+    border-left-style: dashed !important;
+    border-left-width: 5px !important;
+}
+
+.notification-item.manual-notification[data-target-type="group"]::before {
+    content: '👥';
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    font-size: 0.8rem;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+}
+
+/* Integração com tema escuro */
+[data-bs-theme="dark"] .sino-btn-notificacao,
+.dark-mode .sino-btn-notificacao {
+   border-color: #ffc107 !important;
+   color: #ffc107 !important;
+}
+
+[data-bs-theme="dark"] .sino-btn-notificacao i,
+.dark-mode .sino-btn-notificacao i {
+   color: #ffc107 !important;
+}
+
+[data-bs-theme="dark"] .sino-dropdown-notificacoes,
+.dark-mode .sino-dropdown-notificacoes {
+   background-color: #212529 !important;
+   border-color: #495057 !important;
+}
+
+[data-bs-theme="dark"] .dropdown-header,
+[data-bs-theme="dark"] .dropdown-footer,
+.dark-mode .dropdown-header,
+.dark-mode .dropdown-footer {
+   background: linear-gradient(135deg, #343a40 0%, #495057 100%) !important;
+   color: #f8f9fa !important;
+}
+
+[data-bs-theme="dark"] .notification-item:hover,
+.dark-mode .notification-item:hover {
+   background: linear-gradient(135deg, #343a40 0%, #495057 100%) !important;
+}
+
+[data-bs-theme="dark"] .notification-title,
+.dark-mode .notification-title {
+   color: #f8f9fa !important;
+}
+
+[data-bs-theme="dark"] .modal-envio-manual .modal-content,
+.dark-mode .modal-envio-manual .modal-content {
+   background-color: #212529 !important;
+   color: #f8f9fa !important;
+}
+
+[data-bs-theme="dark"] .target-info-text,
+.dark-mode .target-info-text {
+   background: linear-gradient(135deg, #1a2332 0%, #2d3748 100%) !important;
+   border-color: #4a5568 !important;
+   color: #e2e8f0 !important;
+}
+
+[data-bs-theme="dark"] #target-user-field,
+[data-bs-theme="dark"] #target-group-field,
+.dark-mode #target-user-field,
+.dark-mode #target-group-field {
+   background: linear-gradient(135deg, #2d3748 0%, #1a202c 100%) !important;
+   border-color: #4a5568 !important;
+}
+
+/* Responsividade para dispositivos móveis */
+@media (max-width: 991.98px) {
+   .sino-notificacao-glpi {
+       margin-left: 0.5rem !important;
+       margin-right: 0.5rem !important;
+   }
+   
+   .sino-btn-notificacao {
+       padding: 0.25rem 0.5rem !important;
+       font-size: 0.8rem !important;
+   }
+   
+   .header-buttons {
+       flex-direction: column !important;
+       gap: 0.125rem !important;
+       min-height: 32px; /* Altura mínima para evitar layout shift */
+   }
+   
+   .header-buttons .btn {
+       padding: 0.125rem 0.25rem !important;
+       font-size: 0.7rem !important;
+       width: 100% !important;
+       justify-content: center !important;
+   }
+}
+
+/* Força visibilidade em telas grandes */
+@media (min-width: 992px) {
+   .sino-notificacao-glpi {
+       display: flex !important;
+       visibility: visible !important;
+       opacity: 1 !important;
+   }
+}
+
+/* Força o sino a aparecer */
+body .sino-notificacao-glpi,
+html .sino-notificacao-glpi {
+   display: flex !important;
+}
+
+/* Animação de entrada suave */
+@keyframes dropdown-fadein {
+   from {
+       opacity: 0;
+       transform: translateY(-10px) scale(0.95);
+   }
+   to {
+       opacity: 1;
+       transform: translateY(0) scale(1);
+   }
+}
+
+.sino-dropdown-notificacoes {
+   animation: dropdown-fadein 0.3s ease-out;
+}
+
+/* Loading state */
+.notifications-loading {
+   text-align: center;
+   padding: 2rem;
+   color: #6c757d;
+}
+
+.notifications-loading i {
+   animation: fa-spin 1s infinite linear;
+   font-size: 2rem;
+   margin-bottom: 1rem;
+}
+
+/* Ajustes para evitar sobreposição */
+.sino-dropdown-notificacoes {
+   transform: translateY(0) !important;
+}
+
+/* Responsividade específica para botões em mobile */
+@media (max-width: 576px) {
+    .header-buttons {
+        flex-direction: column !important;
+        gap: 0.25rem !important;
+    }
+    
+    .header-buttons .btn {
+        width: 100% !important;
+        justify-content: center !important;
+        transition: all 0.2s ease-out !important;
+        padding: 0.375rem 0.75rem !important;
+        font-size: 0.8rem !important;
+    }
+
+    /* Remove qualquer animação conflitante */
+.sino-dropdown-notificacoes * {
+    animation-fill-mode: both !important;
+}
+    
+    /* Modal em mobile - layout específico */
+    .modal-envio-manual .row {
+        flex-direction: column !important;
+    }
+    
+    .modal-envio-manual .col-md-6 {
+        width: 100% !important;
+        max-width: 100% !important;
+        flex: none !important;
+    }
+    
+    #target-user-field,
+    #target-group-field {
+        margin-top: 0.5rem !important;
+    }
+}
+
+/* Debug: adiciona outline vermelho para testar clicabilidade */
+.debug-buttons .btn {
+    outline: 2px solid red !important;
+    outline-offset: 2px !important;
+}
+
+/* Marca visual de que o botão está funcionando */
+.btn-functional:after {
+    content: '✓';
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background: #28a745;
+    color: white;
+    border-radius: 50%;
+    width: 12px;
+    height: 12px;
+    font-size: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+}
+
+/* Estados de hover melhorados para selects */
+#target-type:hover,
+#target-user:hover,
+#target-group:hover {
+    border-color: #80bdff !important;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.1) !important;
+}
+
+/* Indicadores visuais para opções de select */
+#target-type option,
+#target-user option,
+#target-group option {
+    padding: 0.5rem !important;
+    font-size: 0.9rem !important;
+}
+
+/* Animação de entrada para campos condicionais */
+.field-show {
+    animation: field-reveal 0.4s ease-out forwards;
+}
+
+@keyframes field-reveal {
+    0% {
+        opacity: 0;
+        transform: translateY(-15px);
+        max-height: 0;
+        padding-top: 0;
+        padding-bottom: 0;
+        margin-top: 0;
+        margin-bottom: 0;
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+        max-height: 200px;
+        padding-top: 0.75rem;
+        padding-bottom: 0.75rem;
+        margin-top: 0;
+        margin-bottom: 1rem;
+    }
+}
+
+/* Melhoria na acessibilidade - foco visível */
+.modal-envio-manual .form-control:focus,
+.modal-envio-manual .form-select:focus,
+.modal-envio-manual .btn:focus {
+    outline: 2px solid #007bff !important;
+    outline-offset: 2px !important;
+}
+
+/* Transições suaves para mudanças de estado */
+* {
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out !important;
+}
+
+/* Ajustes finais para compatibilidade */
+.modal-envio-manual * {
+    box-sizing: border-box !important;
+}
+
+/* Força aplicação de estilos específicos */
+.modal-envio-manual .form-control,
+.modal-envio-manual .form-select {
+    appearance: none !important;
+    -webkit-appearance: none !important;
+    -moz-appearance: none !important;
+}
+
+/* Placeholder styling */
+.modal-envio-manual .form-control::placeholder {
+    color: #6c757d !important;
+    opacity: 0.7 !important;
+}
+
+/* Estilo para contadores de caracteres */
+.form-text {
+    font-size: 0.8rem !important;
+    margin-top: 0.25rem !important;
+    transition: color 0.3s ease !important;
+}
+
+.form-text.text-warning {
+    font-weight: 600 !important;
+    animation: text-warning-pulse 1s ease-in-out infinite alternate;
+}
+
+@keyframes text-warning-pulse {
+    0% { color: #fd7e14; }
+    100% { color: #e55a00; }
+}
+
+/* ESTILOS PARA LISTAGEM DE USUÁRIOS DO GRUPO */
+#group-users-list {
+    animation: group-users-fadein 0.4s ease-out;
+    border: 1px solid #dee2e6 !important;
+    border-radius: 0.5rem !important;
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%) !important;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1) !important;
+}
+
+@keyframes group-users-fadein {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+        max-height: 0;
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+        max-height: 500px;
+    }
+}
+
+#group-users-list h6 {
+    color: #0d6efd !important;
+    font-weight: 700 !important;
+    margin-bottom: 1rem !important;
+}
+
+.users-grid {
+    max-height: 300px;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: #dee2e6 transparent;
+}
+
+.users-grid::-webkit-scrollbar {
+    width: 6px;
+}
+
+.users-grid::-webkit-scrollbar-track {
+    background: #f8f9fa;
+    border-radius: 3px;
+}
+
+.users-grid::-webkit-scrollbar-thumb {
+    background: #dee2e6;
+    border-radius: 3px;
+}
+
+.users-grid::-webkit-scrollbar-thumb:hover {
+    background: #adb5bd;
+}
+
+/* Badges dos usuários */
+#group-users-list .badge {
+    font-size: 0.8rem !important;
+    padding: 0.4rem 0.6rem !important;
+    margin-bottom: 0.25rem !important;
+    display: inline-block !important;
+    max-width: 100% !important;
+    text-overflow: ellipsis !important;
+    overflow: hidden !important;
+    white-space: nowrap !important;
+}
+
+#group-users-list .badge.bg-success {
+    background: linear-gradient(135deg, #28a745 0%, #20c997 100%) !important;
+    color: white !important;
+    border: 1px solid rgba(255,255,255,0.2) !important;
+}
+
+#group-users-list .badge.bg-warning {
+    background: linear-gradient(135deg, #ffc107 0%, #fd7e14 100%) !important;
+    color: #212529 !important;
+    border: 1px solid rgba(0,0,0,0.1) !important;
+   font-weight: 600 !important;
+}
+
+/* Alertas informativos */
+#group-users-list .alert {
+   border: none !important;
+   border-radius: 0.375rem !important;
+   font-size: 0.85rem !important;
+   line-height: 1.4 !important;
+}
+
+#group-users-list .alert-warning {
+   background: linear-gradient(135deg, rgba(255, 193, 7, 0.1) 0%, rgba(255, 193, 7, 0.2) 100%) !important;
+   border-left: 4px solid #ffc107 !important;
+   color: #856404 !important;
+}
+
+#group-users-list .alert-info {
+   background: linear-gradient(135deg, rgba(13, 202, 240, 0.1) 0%, rgba(13, 202, 240, 0.2) 100%) !important;
+   border-left: 4px solid #0dcaf0 !important;
+   color: #055160 !important;
+}
+
+#group-users-list .alert-danger {
+   background: linear-gradient(135deg, rgba(220, 53, 69, 0.1) 0%, rgba(220, 53, 69, 0.2) 100%) !important;
+   border-left: 4px solid #dc3545 !important;
+   color: #721c24 !important;
+}
+
+/* Caixa de informações do grupo */
+#group-users-list .bg-primary.bg-opacity-10 {
+   background: linear-gradient(135deg, rgba(13, 110, 253, 0.1) 0%, rgba(13, 110, 253, 0.2) 100%) !important;
+   border: 1px solid rgba(13, 110, 253, 0.3) !important;
+   border-radius: 0.375rem !important;
+   color: #084298 !important;
+}
+
+/* Caixa de estatísticas */
+#group-users-list .bg-info.bg-opacity-10 {
+   background: linear-gradient(135deg, rgba(13, 202, 240, 0.1) 0%, rgba(13, 202, 240, 0.2) 100%) !important;
+   border: 1px solid rgba(13, 202, 240, 0.3) !important;
+   border-radius: 0.375rem !important;
+   color: #055160 !important;
+   font-size: 0.9rem !important;
+}
+
+/* Títulos das seções */
+#group-users-list h6.text-success {
+   color: #198754 !important;
+   border-bottom: 2px solid rgba(25, 135, 84, 0.2) !important;
+   padding-bottom: 0.5rem !important;
+   margin-bottom: 0.75rem !important;
+}
+
+#group-users-list h6.text-warning {
+   color: #f57c00 !important;
+   border-bottom: 2px solid rgba(245, 124, 0, 0.2) !important;
+   padding-bottom: 0.5rem !important;
+   margin-bottom: 0.75rem !important;
+}
+
+/* Layout responsivo para a grade de usuários */
+@media (max-width: 768px) {
+   #group-users-list .row .col-md-6 {
+       width: 100% !important;
+       max-width: 100% !important;
+       flex: none !important;
+   }
+   
+   #group-users-list .badge {
+       font-size: 0.75rem !important;
+       padding: 0.3rem 0.5rem !important;
+   }
+   
+   .users-grid {
+       max-height: 250px;
+   }
+}
+
+/* Animação de hover nos badges */
+#group-users-list .badge:hover {
+   transform: translateY(-1px) !important;
+   box-shadow: 0 2px 8px rgba(0,0,0,0.15) !important;
+   transition: all 0.2s ease !important;
+}
+
+/* Indicador de carregamento */
+#group-users-list .fa-spinner {
+   color: #6c757d !important;
+   font-size: 1rem !important;
+}
+
+/* Melhorias na acessibilidade */
+#group-users-list *:focus {
+   outline: 2px solid #0d6efd !important;
+   outline-offset: 2px !important;
+}
+
+/* Container principal da listagem */
+#group-users-list {
+   max-height: 400px !important;
+   overflow-y: auto !important;
+   position: relative !important;
+}
+
+/* Efeito de gradiente no topo e fundo quando há scroll */
+#group-users-list::before {
+   content: '';
+   position: sticky;
+   top: 0;
+   left: 0;
+   right: 0;
+   height: 10px;
+   background: linear-gradient(to bottom, rgba(248, 249, 250, 1) 0%, rgba(248, 249, 250, 0) 100%);
+   z-index: 1;
+   pointer-events: none;
+}
+
+#group-users-list::after {
+   content: '';
+   position: sticky;
+   bottom: 0;
+   left: 0;
+   right: 0;
+   height: 10px;
+   background: linear-gradient(to top, rgba(248, 249, 250, 1) 0%, rgba(248, 249, 250, 0) 100%);
+   z-index: 1;
+   pointer-events: none;
+}
+
+/* Contador de usuários no cabeçalho */
+#group-users-list h6 .badge {
+   background: #0d6efd !important;
+   color: white !important;
+   font-size: 0.7rem !important;
+   padding: 0.2rem 0.4rem !important;
+   border-radius: 0.25rem !important;
+   margin-left: 0.5rem !important;
+}
+
+/* Estilo especial para quando não há usuários */
+#group-users-list .alert-warning.mb-0 {
+   text-align: center !important;
+   padding: 2rem !important;
+   background: linear-gradient(135deg, rgba(255, 193, 7, 0.1) 0%, rgba(255, 193, 7, 0.3) 100%) !important;
+}
+
+#group-users-list .alert-warning.mb-0 i {
+   font-size: 2rem !important;
+   margin-bottom: 1rem !important;
+   display: block !important;
+   color: #f57c00 !important;
+}
+
+/* Separador visual entre seções */
+#group-users-list .mb-3:not(:last-child) {
+   border-bottom: 1px solid rgba(0,0,0,0.1) !important;
+   padding-bottom: 1rem !important;
+}
+
+/* Estilo para o texto do resumo */
+#group-users-list .bg-info.bg-opacity-10 strong {
+   color: #0a4f5c !important;
+   font-weight: 700 !important;
+}
+
+/* Ícones coloridos no resumo */
+#group-users-list .bg-info.bg-opacity-10 .fa-users {
+   color: #6f42c1 !important;
+}
+
+#group-users-list .bg-info.bg-opacity-10 .fa-check-circle {
+   color: #198754 !important;
+}
+
+#group-users-list .bg-info.bg-opacity-10 .fa-exclamation-triangle {
+   color: #f57c00 !important;
+}
+
+/* Efeito de entrada suave para cada badge */
+#group-users-list .badge {
+   animation: badge-slide-in 0.3s ease-out forwards;
+   opacity: 0;
+   transform: translateX(-10px);
+}
+
+@keyframes badge-slide-in {
+   to {
+       opacity: 1;
+       transform: translateX(0);
+   }
+}
+
+/* Delay escalonado para cada badge */
+#group-users-list .col-md-6:nth-child(1) .badge { animation-delay: 0.1s; }
+#group-users-list .col-md-6:nth-child(2) .badge { animation-delay: 0.2s; }
+#group-users-list .col-md-6:nth-child(3) .badge { animation-delay: 0.3s; }
+#group-users-list .col-md-6:nth-child(4) .badge { animation-delay: 0.4s; }
+#group-users-list .col-md-6:nth-child(5) .badge { animation-delay: 0.5s; }
+#group-users-list .col-md-6:nth-child(6) .badge { animation-delay: 0.6s; }
+#group-users-list .col-md-6:nth-child(n+7) .badge { animation-delay: 0.7s; }
+
+/* Tema escuro */
+[data-bs-theme="dark"] #group-users-list,
+.dark-mode #group-users-list {
+   background: linear-gradient(135deg, #212529 0%, #343a40 100%) !important;
+   border-color: #495057 !important;
+   color: #f8f9fa !important;
+}
+
+[data-bs-theme="dark"] #group-users-list h6,
+.dark-mode #group-users-list h6 {
+   color: #0dcaf0 !important;
+}
+
+[data-bs-theme="dark"] #group-users-list .bg-primary.bg-opacity-10,
+.dark-mode #group-users-list .bg-primary.bg-opacity-10 {
+   background: linear-gradient(135deg, rgba(13, 110, 253, 0.2) 0%, rgba(13, 110, 253, 0.3) 100%) !important;
+   border-color: rgba(13, 110, 253, 0.5) !important;
+   color: #9ec5fe !important;
+}
+
+[data-bs-theme="dark"] #group-users-list .bg-info.bg-opacity-10,
+.dark-mode #group-users-list .bg-info.bg-opacity-10 {
+   background: linear-gradient(135deg, rgba(13, 202, 240, 0.2) 0%, rgba(13, 202, 240, 0.3) 100%) !important;
+   border-color: rgba(13, 202, 240, 0.5) !important;
+   color: #86cfda !important;
+}
+
+/* Estados de loading melhorados */
+#group-users-list .fa-spinner.fa-spin {
+   animation: fa-spin 1s infinite linear, pulse-loading 2s ease-in-out infinite alternate;
+}
+
+@keyframes pulse-loading {
+   0% { opacity: 0.5; }
+   100% { opacity: 1; }
+}
+
+/* Tooltip para badges muito longos */
+#group-users-list .badge[title] {
+   cursor: help;
+}
+
+/* Destaque para grupos vazios */
+#group-users-list .alert-warning.mb-0::before {
+   content: '👥';
+   font-size: 3rem;
+   display: block;
+   margin-bottom: 1rem;
+   opacity: 0.5;
+}
